@@ -69,14 +69,14 @@ int main() {
 
     // Menu utama
     while (lanjutProgram == true) {
-        cout << "===========================================" << endl;
+        cout << "============================================" << endl;
         cout << "                 MENU UTAMA                " << endl;
-        cout << "===========================================" << endl;
+        cout << "============================================" << endl;
         cout << "1. Konversi Sentimeter -> Meter & Kilometer" << endl;
-        cout << "2. Konversi Meter -> Kilometer & Sentimeter" << endl;
-        cout << "3. Konversi Kilometer -> Meter & Sentimeter" << endl;
+        cout << "2. Konversi Meter ->  Sentimeter & Kilometer" << endl;
+        cout << "3. Konversi Kilometer -> Sentimeter & Meter" << endl;
         cout << "4. Keluar" << endl;
-        cout << "===========================================" << endl;
+        cout << "============================================" << endl;
         cout << "Masukkan Pilihan Menu (1-4): ";
         cin >> pilihanMenu;
         cout << endl;
@@ -127,8 +127,7 @@ int main() {
 
 	// Pilihan menu tidak valid
         } else {
-            cout << "Pilihan menu tidak valid! Silakan pilih 1-4." << endl;
-            cout << endl;
+            cout << "Pilihan menu tidak valid! Silakan pilih 1-4." << endl << endl;
         }
     }
 
