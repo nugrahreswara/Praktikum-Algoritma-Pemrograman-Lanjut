@@ -21,7 +21,7 @@ struct VM {
 
 struct Pengguna {
     char nama[100];
-    char nim[100];   // digunakan sebagai password
+    char password[100];   // digunakan sebagai password
     char email[100];
     char role[20];   // "admin" atau "user"
 };
@@ -208,7 +208,7 @@ void lihatSemuaUser(Pengguna *daftarPengguna, int jumlahPengguna) {
     for (int i = 0; i < jumlahPengguna; i++) {
         int len = strlen(daftarPengguna[i].nama);
         if (len > maxNama) maxNama = len;
-        len = strlen(daftarPengguna[i].nim);
+        len = strlen(daftarPengguna[i].password);
         if (len > maxPassword) maxPassword = len;
         len = strlen(daftarPengguna[i].email);
         if (len > maxEmail) maxEmail = len;
@@ -269,7 +269,7 @@ void lihatSemuaUser(Pengguna *daftarPengguna, int jumlahPengguna) {
         cout << "|";
         cetakDenganLebar(daftarPengguna[i].nama, maxNama);
         cout << "|";
-        cetakDenganLebar(daftarPengguna[i].nim, maxPassword);
+        cetakDenganLebar(daftarPengguna[i].password, maxPassword);
         cout << "|";
         cetakDenganLebar(daftarPengguna[i].email, maxEmail);
         cout << "|";
@@ -312,7 +312,7 @@ void ubahDataUser(Pengguna *daftarPengguna, int jumlahPengguna, VM *daftarVM, in
     int index = no-1;
     cout << "=== Data lama ===" << endl;
     cout << "Nama: " << daftarPengguna[index].nama << endl;
-    cout << "Password: " << daftarPengguna[index].nim << endl;
+    cout << "Password: " << daftarPengguna[index].password << endl;
     cout << "Email: " << daftarPengguna[index].email << endl;
     cout << "Role: " << daftarPengguna[index].role << endl;
     cout << endl << "Masukkan data baru (kosongkan jika tidak diubah):" << endl;
@@ -347,7 +347,7 @@ void ubahDataUser(Pengguna *daftarPengguna, int jumlahPengguna, VM *daftarVM, in
     cout << "Password baru: ";
     cin.getline(input, 200);
     if (strlen(input) > 0) {
-        strcpy(daftarPengguna[index].nim, input);
+        strcpy(daftarPengguna[index].password, input);
     }
 
     cout << "Email baru: ";
@@ -673,7 +673,7 @@ void ubahProfilAdmin(Pengguna *daftarPengguna, int indeksLogin, VM *daftarVM, in
     int index = indeksLogin;
     cout << "=== Data profil Anda ===" << endl;
     cout << "Nama: " << daftarPengguna[index].nama << endl;
-    cout << "Password: " << daftarPengguna[index].nim << endl;
+    cout << "Password: " << daftarPengguna[index].password << endl;
     cout << "Email: " << daftarPengguna[index].email << endl;
     cout << endl << "Masukkan data baru (kosongkan jika tidak diubah):" << endl;
     char input[200];
@@ -708,7 +708,7 @@ void ubahProfilAdmin(Pengguna *daftarPengguna, int indeksLogin, VM *daftarVM, in
     cout << "Password baru: ";
     cin.getline(input, 200);
     if (strlen(input) > 0) {
-        strcpy(daftarPengguna[index].nim, input);
+        strcpy(daftarPengguna[index].password, input);
     }
 
     // Update Email
@@ -726,7 +726,7 @@ void ubahProfilUser(Pengguna *daftarPengguna, int indeksLogin, VM *daftarVM, int
     int index = indeksLogin;
     cout << "=== Data profil Anda ===" << endl;
     cout << "Nama: " << daftarPengguna[index].nama << endl;
-    cout << "Password: " << daftarPengguna[index].nim << endl;
+    cout << "Password: " << daftarPengguna[index].password << endl;
     cout << "Email: " << daftarPengguna[index].email << endl;
     cout << endl << "Masukkan data baru (kosongkan jika tidak diubah):" << endl;
     char input[200];
@@ -761,7 +761,7 @@ void ubahProfilUser(Pengguna *daftarPengguna, int indeksLogin, VM *daftarVM, int
     cout << "Password baru: ";
     cin.getline(input, 200);
     if (strlen(input) > 0) {
-        strcpy(daftarPengguna[index].nim, input);
+        strcpy(daftarPengguna[index].password, input);
     }
 
     // Update Email
@@ -815,11 +815,11 @@ int login(Pengguna *daftarPengguna, int jumlahPengguna) {
         char inputNama[100];
         cin.getline(inputNama, 100);
         cout << "Masukkan password: ";
-        char inputNim[100];
-        cin.getline(inputNim, 100);
+        char inputpassword[100];
+        cin.getline(inputpassword, 100);
 
         for (int i = 0; i < jumlahPengguna; i++) {
-            if (strcmp(daftarPengguna[i].nama, inputNama) == 0 && strcmp(daftarPengguna[i].nim, inputNim) == 0) {
+            if (strcmp(daftarPengguna[i].nama, inputNama) == 0 && strcmp(daftarPengguna[i].password, inputpassword) == 0) {
                 cout << "Login berhasil! Selamat datang, " << daftarPengguna[i].nama << endl;
                 return i;
             }
@@ -860,7 +860,7 @@ void registrasi(Pengguna *daftarPengguna, int &jumlahPengguna) {
     }
 
     cout << "Masukkan password: ";
-    cin.getline(baru.nim, 100);
+    cin.getline(baru.password, 100);
     cout << "Masukkan email: ";
     cin.getline(baru.email, 100);
     strcpy(baru.role, "user");
@@ -878,7 +878,7 @@ int main() {
 
     // Admin default
     strcpy(daftarPengguna[0].nama, "Anugerah Fakhriza Reswara");
-    strcpy(daftarPengguna[0].nim, "2509106025");
+    strcpy(daftarPengguna[0].password, "2509106025");
     strcpy(daftarPengguna[0].email, "nugrah@nugrah.my.id");
     strcpy(daftarPengguna[0].role, "admin");
     jumlahPengguna = 1;
