@@ -869,6 +869,57 @@ void registrasi(Pengguna *daftarPengguna, int &jumlahPengguna) {
     cout << "Registrasi berhasil! Silakan login." << endl;
 }
 
+
+// Prosedur sorting VM berdasarkan nama (ascending) menggunakan Insertion Sort
+void sortVMByNamaAsc(VM *daftarVM, int jumlahVM) {
+    for (int i = 1; i < jumlahVM; i++) {
+        VM kunci = daftarVM[i];
+        int j = i - 1;
+
+        // Selama elemen sebelumnya lebih besar secara alfabet, geser ke kanan
+        while (j >= 0 && strcmp(daftarVM[j].namaVM, kunci.namaVM) > 0) {
+            daftarVM[j + 1] = daftarVM[j];
+            j = j - 1;
+        }
+        daftarVM[j + 1] = kunci;
+    }
+}
+
+
+// Prosedur sorting VM berdasarkan RAM (descending) menggunakan Bubble Sort
+void sortVMByRAMDesc(VM *daftarVM, int jumlahVM) {
+    for (int i = 0; i < jumlahVM - 1; i++) {
+        for (int j = 0; j < jumlahVM - i - 1; j++) {
+            if (daftarVM[j].spek.ram < daftarVM[j+1].spek.ram) {
+                VM temp = daftarVM[j];
+                daftarVM[j] = daftarVM[j+1];
+                daftarVM[j+1] = temp;
+            }
+        }
+    }
+}
+
+
+// Prosedur sorting Pengguna berdasarkan nama (ascending) menggunakan Selection Sort
+void sortPenggunaByNamaAsc(Pengguna *daftarPengguna, int jumlahPengguna) {
+    for (int i = 0; i < jumlahPengguna - 1; i++) {
+        int indeksMin = i;
+
+        for (int j = i + 1; j < jumlahPengguna; j++) {
+            if (strcmp(daftarPengguna[j].nama, daftarPengguna[indeksMin].nama) < 0) {
+                indeksMin = j;
+            }
+        }
+
+        if (indeksMin != i) {
+            Pengguna temp = daftarPengguna[i];
+            daftarPengguna[i] = daftarPengguna[indeksMin];
+            daftarPengguna[indeksMin] = temp;
+        }
+    }
+}
+
+
 int main() {
     // Inisialisasi data default admin
     Pengguna daftarPengguna[MAX_PENGGUNA];
@@ -917,8 +968,11 @@ int main() {
                         cout << "8. Operasi VM (Start/Stop/Restart)" << endl;
                         cout << "9. Hapus VM" << endl;
                         cout << "10. Ubah Profil Admin" << endl;
-                        cout << "11. Logout" << endl;
-                        cout << "12. Keluar" << endl;
+                        cout << "11. Lihat VM Terurut Berdasarkan Nama (A-Z)" << endl;
+                        cout << "12. Lihat VM Terurut Berdasarkan RAM (Terbesar ke Terkecil)" << endl;
+                        cout << "13. Lihat User Terurut Berdasarkan Nama (A-Z)" << endl;
+                        cout << "14. Logout" << endl;
+                        cout << "15. Keluar" << endl;
                         cout << "Pilih: ";
                         int pilihan;
                         cin >> pilihan;
@@ -935,8 +989,11 @@ int main() {
                             case 8: operasiVMAdmin(daftarVM, jumlahVM); break;
                             case 9: hapusVM(daftarVM, jumlahVM); break;
                             case 10: ubahProfilAdmin(daftarPengguna, indeksLogin, daftarVM, jumlahVM, jumlahPengguna); break;
-                            case 11: logout = true; cout << "Logout berhasil." << endl; break;
-                            case 12: cout << "Terima kasih telah menggunakan program." << endl; return 0;
+                            case 11: sortVMByNamaAsc(daftarVM, jumlahVM); lihatVM(daftarVM, jumlahVM); break;
+                            case 12: sortVMByRAMDesc(daftarVM, jumlahVM); lihatVM(daftarVM, jumlahVM); break;
+                            case 13: sortPenggunaByNamaAsc(daftarPengguna, jumlahPengguna); lihatSemuaUser(daftarPengguna, jumlahPengguna); break;
+                            case 14: logout = true; cout << "Logout berhasil." << endl; break;
+                            case 15: cout << "Terima kasih telah menggunakan program." << endl; return 0;
                             default: cout << "Pilihan tidak valid." << endl;
                         }
                     }
